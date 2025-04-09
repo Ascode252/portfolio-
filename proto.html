@@ -1,0 +1,1362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Asma | Frontend Developer & UI/UX Designer</title>
+  <meta name="description" content="Asma - Frontend Developer and UI/UX Designer specializing in creating vibrant digital experiences that connect people">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+  <style>
+    :root {
+      --primary: #6366f1;
+      --primary-light: #818cf8;
+      --primary-dark: #4f46e5;
+      --secondary: #14b8a6;
+      --accent: #f43f5e;
+      --dark: #1e293b;
+      --light: #f8fafc;
+      --gray: #64748b;
+      --card-bg: rgba(255, 255, 255, 0.95);
+      --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      --transition: all 0.3s ease;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--dark);
+      background-color: var(--light);
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
+
+    /* Global Styles */
+    section {
+      padding: 120px 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    @media (max-width: 768px) {
+      section {
+        padding: 80px 0;
+      }
+    }
+
+    .bg-alternate {
+      background: linear-gradient(180deg, rgba(99, 102, 241, 0.03) 0%, rgba(99, 102, 241, 0.06) 100%);
+    }
+
+    .section-title {
+      font-weight: 800;
+      position: relative;
+      margin-bottom: 3rem;
+      display: inline-block;
+    }
+
+    .section-title::after {
+      content: "";
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 80px;
+      height: 4px;
+      background: var(--accent);
+      border-radius: 10px;
+    }
+
+    .blur-circle {
+      display: none;
+    }
+
+    .emoji {
+      display: inline-block;
+      margin-right: 10px;
+      background: white;
+      width: 40px;
+      height: 40px;
+      line-height: 40px;
+      text-align: center;
+      border-radius: 50%;
+      box-shadow: var(--card-shadow);
+    }
+
+    /* Navbar Styles */
+    .navbar {
+      padding: 20px 0;
+      transition: var(--transition);
+      z-index: 1000;
+    }
+
+    .navbar.scrolled {
+      background-color: rgba(255, 255, 255, 0.98) !important;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+      padding: 15px 0;
+      backdrop-filter: blur(10px);
+    }
+
+    .navbar-brand {
+      font-weight: 800;
+      font-size: 28px;
+      color: var(--primary) !important;
+    }
+
+    .navbar-brand span {
+      position: relative;
+    }
+
+    .navbar-brand span::after {
+      content: "";
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      background: var(--accent);
+      border-radius: 50%;
+      bottom: 5px;
+      right: -10px;
+    }
+
+    .nav-link {
+      font-weight: 600;
+      color: var(--dark) !important;
+      position: relative;
+      transition: var(--transition);
+      padding: 0.5rem 1rem !important;
+    }
+
+    .nav-link::after {
+      content: "";
+      position: absolute;
+      width: 0;
+      height: 2px;
+      background: var(--primary);
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      transition: width 0.3s;
+    }
+
+    .nav-link:hover::after,
+    .nav-link.active::after {
+      width: 80%;
+    }
+
+    .nav-link:hover {
+      color: var(--primary) !important;
+    }
+
+    /* Content Styles */
+    .content-container {
+      padding-top: 80px;
+    }
+
+    /* Button Styles */
+    .custom-btn {
+      background: linear-gradient(45deg, var(--primary), var(--primary-light));
+      color: white;
+      border: none;
+      padding: 12px 30px;
+      border-radius: 50px;
+      font-weight: 600;
+      display: inline-block;
+      text-decoration: none;
+      box-shadow: 0 5px 15px rgba(99, 102, 241, 0.4);
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .custom-btn::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, var(--primary-dark), var(--primary));
+      transition: var(--transition);
+      z-index: -1;
+    }
+
+    .custom-btn:hover {
+      color: white;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(99, 102, 241, 0.5);
+    }
+
+    .custom-btn:hover::before {
+      left: 0;
+    }
+
+    .custom-btn span {
+      margin-left: 8px;
+      transition: transform 0.3s ease;
+    }
+
+    .custom-btn:hover span {
+      transform: translateX(3px);
+    }
+
+    .filter-btn {
+      background: transparent;
+      border: none;
+      padding: 8px 18px;
+      margin: 0 5px 10px 0;
+      border-radius: 50px;
+      font-weight: 600;
+      color: var(--gray);
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .filter-btn.active, .filter-btn:hover {
+      color: var(--primary);
+      background: rgba(99, 102, 241, 0.1);
+    }
+
+    /* Card Styles */
+    .custom-card {
+      background: var(--card-bg);
+      border-radius: 16px;
+      padding: 30px;
+      box-shadow: var(--card-shadow);
+      transition: var(--transition);
+      height: 100%;
+      border: 1px solid rgba(0, 0, 0, 0.03);
+    }
+
+    .custom-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+    }
+
+    /* Progress Bar Styles */
+    .progress {
+      height: 8px;
+      border-radius: 10px;
+      background-color: rgba(99, 102, 241, 0.1);
+      overflow: visible;
+    }
+
+    .progress-bar {
+      background: linear-gradient(45deg, var(--primary), var(--secondary));
+      border-radius: 10px;
+      position: relative;
+      transition: width 1.5s ease-in-out;
+    }
+
+    .progress-bar::after {
+      content: "";
+      position: absolute;
+      right: 0;
+      top: -4px;
+      width: 16px;
+      height: 16px;
+      background: white;
+      border: 3px solid var(--primary);
+      border-radius: 50%;
+    }
+
+    /* About Section Styles */
+    #about img {
+      transition: var(--transition);
+      filter: saturate(1.1);
+    }
+
+    #about img:hover {
+      transform: scale(1.03);
+    }
+
+    .stats-item {
+      transition: var(--transition);
+    }
+
+    .stats-item:hover {
+      transform: translateY(-5px);
+    }
+
+    /* Work Section Styles */
+    .project-icon {
+      background: white;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    }
+
+    .project-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: 10px;
+    }
+
+    .project-img {
+      transition: transform 0.5s ease;
+      height: 200px;
+      object-fit: cover;
+      width: 100%;
+    }
+
+    .project-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(99, 102, 241, 0.85);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: var(--transition);
+      border-radius: 10px;
+    }
+
+    .project-card:hover .project-overlay {
+      opacity: 1;
+    }
+
+    .project-card:hover .project-img {
+      transform: scale(1.1);
+    }
+
+    .project-category {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 5px 15px;
+      border-radius: 30px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    /* Contact Section Styles */
+    .contact-icon {
+      background: rgba(99, 102, 241, 0.1);
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      margin-right: 15px;
+      color: var(--primary);
+      font-size: 1.2rem;
+      transition: var(--transition);
+    }
+
+    .contact-item:hover .contact-icon {
+      background: var(--primary);
+      color: white;
+      transform: scale(1.1);
+    }
+
+    .social-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 45px;
+      height: 45px;
+      background: white;
+      border-radius: 50%;
+      margin-right: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.07);
+      transition: var(--transition);
+      text-decoration: none;
+      color: var(--dark);
+    }
+
+    .social-icon:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      background: var(--primary);
+      color: white;
+    }
+
+    .form-control {
+      border: none;
+      background: rgba(99, 102, 241, 0.05);
+      padding: 15px 20px;
+      border-radius: 10px;
+      transition: var(--transition);
+    }
+
+    .form-control:focus {
+      box-shadow: none;
+      background: white;
+      border: 1px solid var(--primary-light);
+    }
+
+    /* Footer Styles */
+    .footer {
+      background: var(--light);
+      border-top: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    /* Animation Styles */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .fade-in.appear {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Stats Counter */
+    .stats-counter {
+      font-weight: 800;
+      font-size: 3rem;
+      margin-bottom: 0.5rem;
+      display: inline-block;
+      position: relative;
+    }
+
+    /* Dark Mode Toggle */
+    .theme-toggle {
+      cursor: pointer;
+      width: 50px;
+      margin-left: 10px;
+      padding: 5px;
+      border-radius: 30px;
+      background: rgba(99, 102, 241, 0.1);
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      position: relative;
+      transition: var(--transition);
+    }
+
+    .theme-toggle.dark {
+      background: var(--primary);
+      justify-content: flex-end;
+    }
+
+    .toggle-circle {
+      width: 20px;
+      height: 20px;
+      background: white;
+      border-radius: 50%;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+
+    /* Dark Mode Styles */
+    body.dark-mode {
+      background-color: #121212;
+      color: #e6e6e6;
+    }
+
+    body.dark-mode .navbar.scrolled {
+      background-color: rgba(18, 18, 18, 0.95) !important;
+    }
+
+    body.dark-mode .custom-card {
+      background: rgba(30, 30, 30, 0.95);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      border-color: rgba(255, 255, 255, 0.03);
+    }
+
+    body.dark-mode .nav-link,
+    body.dark-mode .footer,
+    body.dark-mode .text-muted {
+      color: #adb5bd !important;
+    }
+
+    body.dark-mode .bg-alternate {
+      background: linear-gradient(180deg, rgba(99, 102, 241, 0.1) 0%, rgba(99, 102, 241, 0.05) 100%);
+    }
+
+    body.dark-mode .social-icon {
+      background: #2d2d2d;
+      color: #e6e6e6;
+    }
+
+    body.dark-mode .form-control {
+      background: rgba(255, 255, 255, 0.1);
+      color: #e6e6e6;
+    }
+
+    body.dark-mode .form-control::placeholder {
+      color: #adb5bd;
+    }
+
+    /* Back to Top Button */
+    .back-to-top {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 50px;
+      height: 50px;
+      background: var(--primary);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      opacity: 0;
+      visibility: hidden;
+      transition: var(--transition);
+      z-index: 99;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+    }
+
+    .back-to-top.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .back-to-top:hover {
+      background: var(--primary-dark);
+      transform: translateY(-3px);
+    }
+
+    /* Preloader */
+    .preloader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--light);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      transition: opacity 0.5s ease, visibility 0.5s ease;
+    }
+
+    body.dark-mode .preloader {
+      background: #121212;
+    }
+
+    .preloader.fade-out {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .loader {
+      width: 50px;
+      height: 50px;
+      border: 3px solid rgba(99, 102, 241, 0.3);
+      border-radius: 50%;
+      border-top-color: var(--primary);
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* Testimonials Section */
+    .testimonial-card {
+      padding: 30px;
+      border-radius: 16px;
+      background: linear-gradient(145deg, #ffffff, #f0f0f0);
+      box-shadow: 10px 10px 20px #d1d1d1, -10px -10px 20px #ffffff;
+      position: relative;
+    }
+
+    body.dark-mode .testimonial-card {
+      background: linear-gradient(145deg, #222222, #1c1c1c);
+      box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.25), -10px -10px 20px rgba(50, 50, 50, 0.25);
+    }
+
+    .testimonial-card::before {
+      content: '\201C';
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      font-size: 80px;
+      color: rgba(99, 102, 241, 0.1);
+      font-family: Georgia, serif;
+      line-height: 1;
+    }
+
+    .client-image {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--primary);
+    }
+
+    .swiper-pagination-bullet-active {
+      background: var(--primary) !important;
+    }
+
+    /* Typing Animation */
+    .typing::after {
+      content: '|';
+      animation: blink 1s infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 992px) {
+      .navbar-collapse {
+        background: var(--card-bg);
+        border-radius: 10px;
+        padding: 15px;
+        box-shadow: var(--card-shadow);
+        margin-top: 10px;
+      }
+      
+      body.dark-mode .navbar-collapse {
+        background: rgba(30, 30, 30, 0.95);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .section-title {
+        margin-bottom: 2rem;
+      }
+
+      .custom-card {
+        padding: 20px;
+      }
+
+      .section-divider {
+        height: 50px;
+      }
+      
+      .divider-wave svg {
+        height: 40px;
+      }
+
+      .stats-counter {
+        font-size: 2.5rem;
+      }
+      
+    }
+
+    @media (max-width: 576px) {
+      .navbar-brand {
+        font-size: 24px;
+      }
+
+      /* section {
+        padding: 60px 0;
+      } */
+
+      .section-divider {
+        height: 50px;
+      }
+      
+      .divider-wave svg {
+        height: 40px;
+      }
+      
+      .custom-btn {
+        padding: 10px 25px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Preloader -->
+  <div class="preloader">
+    <div class="loader"></div>
+  </div>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top bg-transparent">
+    <div class="container">
+      <a class="navbar-brand" href="#home"><span>Portfolio.</span></a>
+      <div class="theme-toggle ms-auto me-3" id="themeToggle">
+        <div class="toggle-circle"></div>
+      </div>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link active mx-2" href="#about">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link mx-2" href="#work">Work</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link mx-2" href="#skills">Skills</a>
+          </li>
+          <!-- <li class="nav-item">
+            <a class="nav-link mx-2" href="#testimonials">Testimonials</a>
+          </li> -->
+          <li class="nav-item">
+            <a class="nav-link mx-2" href="#contact">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="content-container">
+    <!-- About Me Section -->
+    <section id="about" class="fade-in">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-lg-6 mb-5 mb-lg-0">
+            <div class="position-relative">
+              <img src="photo-output.PNG" alt="Profile" 
+                style="width: 500px; height: 700px; object-fit: cover; border-radius: 15px; transition: transform 0.3s ease;">
+              <div class="position-absolute"
+                style="bottom: 10%; right: 10%; background: var(--light); padding: 15px; border-radius: 50%; z-index: 1;">
+                <i class="fas fa-fire" style="font-size: 2rem; color: var(--accent);"></i>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <h1 class="display-4 fw-bold mb-4">
+              Hi, I'm <span style="color: var(--accent);">Asma</span>
+            </h1>
+            <h2 class="mb-4 typing" style="font-size: 1.8rem;" id="typingText">
+              Web Developer & UI/UX Designer
+            </h2>
+            <p class="lead mb-4">
+              I create <span
+                style="text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 3px;">vibrant</span>
+              digital experiences that connect people.
+              Passionate about building interfaces that are both beautiful and functional, I focus on creating user-centric solutions that drive engagement and deliver results.
+            </p>
+            <div class="d-flex flex-wrap gap-3">
+              <a href="#contact" class="custom-btn">Let's Talk <span><i class="fas fa-paper-plane"></i></span></a>
+              <a href="#work" class="custom-btn" style="background: white; color: var(--primary); box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);">
+                View Projects <span><i class="fas fa-arrow-right"></i></span>
+              </a>
+              <a href="Asma's CV.pdf" target="_blank" class="custom-btn" style="background: var(--secondary); color: white;">
+                View My Resume <span><i class="fas fa-file-alt"></i></span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- My Work Section -->
+    <section id="work" class="bg-alternate fade-in">
+      <div class="container">
+        <h2 class="section-title mb-5">
+          <span class="emoji"><i class="fas fa-briefcase"></i></span>
+          My Projects
+        </h2>
+        <div class="mb-5">
+          <button class="filter-btn active" data-filter="all">All</button>
+          <!-- <button class="filter-btn" data-filter="web">Web</button>
+          <button class="filter-btn" data-filter="ui">UI/UX</button>
+          <button class="filter-btn" data-filter="mobile">Mobile</button> -->
+        </div>
+        <div class="row project-container">
+          <!-- Project 1 -->
+          <div class="col-lg-6 mb-4 project-item" data-category="smart-systems">
+            <div class="custom-card h-100">
+              <div class="project-card mb-3">
+                <span class="project-category">Smart Systems</span>
+                <img src="https://via.placeholder.com/400x300" alt="Campus Twin System" class="project-img">
+                <div class="project-overlay">
+                  <div class="text-center text-white">
+                    <h5 class="mb-2">View Project</h5>
+                    <i class="fas fa-external-link-alt"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="d-flex justify-content-between align-items-center">
+                <div>
+                  <h4>Campus Twin</h4>
+                  <p class="text-muted mb-0">Smart monitoring and reporting system for university resources</p>
+                </div>
+                <a href="Campus Twin (2).pdf" class="btn btn-light rounded-circle" style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; box-shadow: 0 3px 10px rgba(0,0,0,0.1);">
+                  <i class="fas fa-arrow-right"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 2 -->
+          <!-- كُتِب (KUTIB) Project -->
+<div class="col-lg-6 mb-4 project-item" data-category="ai-content">
+  <div class="custom-card h-100">
+    <div class="project-card mb-3">
+      <span class="project-category">AI Content Creation</span>
+      <img src="https://via.placeholder.com/400x300" alt="كُتِب (KUTIB) Platform" class="project-img">
+      <div class="project-overlay">
+        <div class="text-center text-white">
+          <h5 class="mb-2">View Project</h5>
+          <i class="fas fa-external-link-alt"></i>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex justify-content-between align-items-center">
+      <div>
+        <h4>كُتِب (KUTIB)</h4>
+        <p class="text-muted mb-0">AI-powered content creation for e-commerce</p>
+      </div>
+      <a href="هاكاثون قوقل.pdf" class="btn btn-light rounded-circle" style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; box-shadow: 0 3px 10px rgba(0,0,0,0.1);">
+        <i class="fas fa-arrow-right"></i>
+      </a>
+    </div>
+  </div>
+</div>
+
+          
+<!-- Project 5 (PrimeX) -->
+<div class="col-lg-6 mb-4 project-item" data-category="mobile">
+  <div class="custom-card h-100">
+    <div class="project-card mb-3">
+      <span class="project-category">Mobile Development</span>
+      <img src="https://via.placeholder.com/400x300" alt="PrimeX App" class="project-img">
+      <div class="project-overlay">
+        <div class="text-center text-white">
+          <h5 class="mb-2">View Project</h5>
+          <i class="fas fa-external-link-alt"></i>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex justify-content-between align-items-center">
+      <div>
+        <h4>PrimeX Delivery Solution</h4>
+        <p class="text-muted mb-0">Smart logistics app for Amazon delivery associates</p>
+      </div>
+      <a href="BUSINESS Case 3 (3).pdf" class="btn btn-light rounded-circle"
+        style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; box-shadow: 0 3px 10px rgba(0,0,0,0.1);">
+        <i class="fas fa-arrow-right"></i>
+      </a>
+    </div>
+  </div>
+</div>
+
+          <!-- Project 4 -->
+          <div class="col-lg-6 mb-4 project-item" data-category="mobile">
+            <div class="custom-card h-100">
+              <div class="project-card mb-3">
+                <span class="project-category">Mobile Development</span>
+                <img src="https://via.placeholder.com/400x300" alt="Find My Bag App" class="project-img">
+                <div class="project-overlay">
+                  <div class="text-center text-white">
+                    <h5 class="mb-2">View Project</h5>
+                    <i class="fas fa-external-link-alt"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="d-flex justify-content-between align-items-center">
+                <div>
+                  <h4>Find My Bag</h4>
+                  <p class="text-muted mb-0">Luggage tracking solution for Hajj pilgrims</p>
+                </div>
+                <a href="عرض تحدي الحج والعمرة.pdf" class="btn btn-light rounded-circle"
+                  style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; box-shadow: 0 3px 10px rgba(0,0,0,0.1);">
+                  <i class="fas fa-arrow-right"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="fade-in">
+      <div class="container">
+        <h2 class="section-title mb-5">
+          <span class="emoji"><i class="fas fa-code"></i></span>
+          My Skills
+        </h2>
+        <div class="row g-4">
+          <!-- Frontend Development -->
+          <div class="col-lg-4 col-md-6">
+            <div class="custom-card">
+              <div class="d-flex align-items-center mb-4">
+                <div class="project-icon">
+                  <i class="fas fa-laptop-code text-primary"></i>
+                </div>
+                <h4 class="ms-3 mb-0">Frontend</h4>
+              </div>
+              <div class="mb-4">
+                <div class="d-flex justify-content-between mb-1">
+                  <span>HTML/CSS</span>
+                  <span>100%</span>
+                </div>
+                <div class="progress">
+                  <div class="progress-bar" role="progressbar" style="width: 100%" aria-valuenow="95" aria-valuemin="0"
+                    aria-valuemax="100"></div>
+                </div>
+              </div>
+              <div class="mb-4">
+                <div class="d-flex justify-content-between mb-1">
+                  <span>JavaScript</span>
+                  <span>90%</span>
+                </div>
+                <div class="progress">
+                  <div class="progress-bar" role="progressbar" style="width: 90%" aria-valuenow="90" aria-valuemin="0"
+                    aria-valuemax="100"></div>
+                </div>
+              </div>
+              <div class="mb-4">
+                <div class="d-flex justify-content-between mb-1">
+                  <span>React</span>
+                  <span>20%</span>
+                </div>
+                <div class="progress">
+                  <div class="progress-bar" role="progressbar" style="width: 20%" aria-valuenow="85" aria-valuemin="0"
+                    aria-valuemax="100"></div>
+                </div>
+              </div>
+              <div>
+                <!-- <div class="d-flex justify-content-between mb-1">
+                  <span>Vue.js</span>
+                  <span>75%</span>
+                </div> -->
+                <!-- <div class="progress">
+                  <div class="progress-bar" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0"
+                    aria-valuemax="100"></div>
+                </div> -->
+              </div>
+            </div>
+          </div>
+
+          <!-- UI/UX Design -->
+          <div class="col-lg-4 col-md-6">
+            <div class="custom-card">
+              <div class="d-flex align-items-center mb-4">
+                <div class="project-icon">
+                  <i class="fas fa-paint-brush text-primary"></i>
+                </div>
+                <h4 class="ms-3 mb-0">UI/UX Design</h4>
+              </div>
+              <div class="mb-4">
+                <div class="d-flex justify-content-between mb-1">
+                  <span>Figma</span>
+                  <span>90%</span>
+                </div>
+                <div class="progress">
+                  <div class="progress-bar" role="progressbar" style="width: 90%" aria-valuenow="90" aria-valuemin="0"
+                    aria-valuemax="100"></div>
+                </div>
+              </div>
+              <div class="mb-4">
+                <div class="d-flex justify-content-between mb-1">
+                  <span>canva</span>
+                  <span>85%</span>
+                </div>
+                <div class="progress">
+                  <div class="progress-bar" role="progressbar" style="width: 85%" aria-valuenow="85" aria-valuemin="0"
+                    aria-valuemax="100"></div>
+                </div>
+              </div>
+              <div class="mb-4">
+                <div class="d-flex justify-content-between mb-1">
+                  <span>Photoshop</span>
+                  <span>30%</span>
+                </div>
+                <div class="progress">
+                  <div class="progress-bar" role="progressbar" style="width: 30%" aria-valuenow="80" aria-valuemin="0"
+                    aria-valuemax="100"></div>
+                </div>
+              </div>
+              <div>
+                <!-- <div class="d-flex justify-content-between mb-1">
+                  <span>Illustrator</span>
+                  <span>75%</span>
+                </div>
+                <div class="progress">
+                  <div class="progress-bar" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0"
+                    aria-valuemax="100"></div>
+                </div> -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Backend Skills -->
+          <div class="col-lg-4 col-md-6">
+            <div class="custom-card">
+              <div class="d-flex align-items-center mb-4">
+                <div class="project-icon">
+                  <i class="fas fa-server text-primary"></i>
+                </div>
+                <h4 class="ms-3 mb-0">Backend</h4>
+              </div>
+              <div class="mb-4">
+                <div class="d-flex justify-content-between mb-1">
+                  <span>C++</span>
+                  <span>80%</span>
+                </div>
+                <div class="progress">
+                  <div class="progress-bar" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0"
+                    aria-valuemax="100"></div>
+                </div>
+              </div>
+              <div class="mb-4">
+                <div class="d-flex justify-content-between mb-1">
+                  <span>Java</span>
+                  <span>90%</span>
+                </div>
+                <div class="progress">
+                  <div class="progress-bar" role="progressbar" style="width: 90%" aria-valuenow="75" aria-valuemin="0"
+                    aria-valuemax="100"></div>
+                </div>
+              </div>
+              <div class="mb-4">
+                <div class="d-flex justify-content-between mb-1">
+                  <span>SQL</span>
+                  <span>70%</span>
+                </div>
+                <div class="progress">
+                  <div class="progress-bar" role="progressbar" style="width: 70%" aria-valuenow="70" aria-valuemin="0"
+                    aria-valuemax="100"></div>
+                </div>
+              </div>
+              <div>
+                <div class="d-flex justify-content-between mb-1">
+                  <span>PHP</span>
+                  <span>85%</span>
+                </div>
+                <div class="progress">
+                  <div class="progress-bar" role="progressbar" style="width: 85%" aria-valuenow="85" aria-valuemin="0"
+                    aria-valuemax="100"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials Section
+    <section id="testimonials" class="bg-alternate fade-in">
+      <div class="container">
+        <h2 class="section-title mb-5">
+          <span class="emoji"><i class="fas fa-comment-dots"></i></span>
+          Testimonials
+        </h2>
+        <div class="row">
+          <div class="col-md-6 mb-4">
+            <div class="testimonial-card">
+              <p class="mb-4">
+                "Alex created a stunning website for our business that perfectly captures our brand's essence. The attention to detail and user experience is exceptional."
+              </p>
+              <div class="d-flex align-items-center">
+                <img src="https://via.placeholder.com/60x60" alt="Client" class="client-image">
+                <div class="ms-3">
+                  <h5 class="mb-0">Sarah Johnson</h5>
+                  <p class="text-muted mb-0">CEO at TechStart</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 mb-4">
+            <div class="testimonial-card">
+              <p class="mb-4">
+                "Working with Alex was a breeze. They understood our requirements immediately and delivered a product that exceeded our expectations. I would highly recommend their services."
+              </p>
+              <div class="d-flex align-items-center">
+                <img src="https://via.placeholder.com/60x60" alt="Client" class="client-image">
+                <div class="ms-3">
+                  <h5 class="mb-0">David Chen</h5>
+                  <p class="text-muted mb-0">Founder of DesignLab</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 mb-4">
+            <div class="testimonial-card">
+              <p class="mb-4">
+                "Alex's creative thinking and problem-solving abilities made our app development process smooth and efficient. The final product is both visually appealing and highly functional."
+              </p>
+              <div class="d-flex align-items-center">
+                <img src="https://via.placeholder.com/60x60" alt="Client" class="client-image">
+                <div class="ms-3">
+                  <h5 class="mb-0">Emily Roberts</h5>
+                  <p class="text-muted mb-0">Marketing Director</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 mb-4">
+            <div class="testimonial-card">
+              <p class="mb-4">
+                "I've worked with many developers, but Alex stands out for their ability to combine technical expertise with artistic vision. They delivered our project on time and on budget."
+              </p>
+              <div class="d-flex align-items-center">
+                <img src="https://via.placeholder.com/60x60" alt="Client" class="client-image">
+                <div class="ms-3">
+                  <h5 class="mb-0">Michael Thompson</h5>
+                  <p class="text-muted mb-0">Product Manager</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section> -->
+
+    <!-- Contact Section -->
+    <section id="contact" class="fade-in">
+      <div class="container">
+        <h2 class="section-title mb-5">
+          <span class="emoji"><i class="fas fa-envelope"></i></span>
+          Get In Touch
+        </h2>
+        <div class="row gy-4">
+          <div class="col-lg-5 mb-5 mb-lg-0">
+            <div class="mb-5">
+              <p class="lead mb-4">Let's create something amazing together. Feel free to contact me for any project or collaboration.</p>
+              <div class="d-flex contact-item align-items-center mb-3">
+                <div class="contact-icon">
+                  <i class="fas fa-envelope"></i>
+                </div>
+                <div>
+                  <h5 class="mb-0">Email</h5>
+                  <p class="mb-0 text-muted">asmaa.alsakkaf@gmail.com</p>
+                </div>
+              </div>
+              <div class="d-flex contact-item align-items-center mb-3">
+                <div class="contact-icon">
+                  <i class="fas fa-phone"></i>
+                </div>
+                <div>
+                  <h5 class="mb-0">Phone</h5>
+                  <p class="mb-0 text-muted">+966 54 024 7573</p>
+                </div>
+              </div>
+              <div class="d-flex contact-item align-items-center mb-4">
+                <div class="contact-icon">
+                  <i class="fas fa-map-marker-alt"></i>
+                </div>
+                <div>
+                  <h5 class="mb-0">Location</h5>
+                  <p class="mb-0 text-muted">Jeddah, Saudi Arabia</p>
+                </div>
+              </div>
+            </div>
+            <div>
+              <h5 class="mb-3">Follow Me</h5>
+              <div>
+                <a href="https://x.com/devAsma0" class="social-icon"><i class="fab fa-twitter"></i></a>
+                <!-- <a href="#" class="social-icon"><i class="fab fa-github"></i></a> -->
+                <a href="https://www.linkedin.com/in/asma-alsakkaf-aa2baa251?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-7">
+            <div class="custom-card">
+              <h3 class="mb-4">Send Me a Message</h3>
+              <form>
+                <div class="row">
+                  <div class="col-md-6 mb-3">
+                    <input type="text" class="form-control" placeholder="Your Name">
+                  </div>
+                  <div class="col-md-6 mb-3">
+                    <input type="email" class="form-control" placeholder="Your Email">
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <input type="text" class="form-control" placeholder="Subject">
+                </div>
+                <div class="mb-4">
+                  <textarea class="form-control" rows="5" placeholder="Your Message"></textarea>
+                </div>
+                <button type="submit" class="custom-btn">Send Message <span><i class="fas fa-paper-plane"></i></span></button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer py-4">
+      <div class="container">
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
+          <p class="mb-3 mb-md-0">&copy; 2025 Alex Portfolio. All rights reserved.</p>
+          <div>
+            <a href="#about" class="text-muted me-3">About</a>
+            <a href="#work" class="text-muted me-3">Work</a>
+            <a href="#skills" class="text-muted me-3">Skills</a>
+            <a href="#contact" class="text-muted">Contact</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <div class="back-to-top">
+      <i class="fas fa-arrow-up"></i>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Preloader
+    window.addEventListener('load', function() {
+      document.querySelector('.preloader').classList.add('fade-out');
+      setTimeout(function() {
+        document.querySelector('.preloader').style.display = 'none';
+      }, 500);
+    });
+
+    // Navbar Scroll Effect
+    window.addEventListener('scroll', function() {
+      const navbar = document.querySelector('.navbar');
+      if (window.scrollY > 50) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+    });
+
+    // Scroll to section
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href');
+        if (targetId === '#') return;
+        
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+          window.scrollTo({
+            top: targetElement.offsetTop - 90,
+            behavior: 'smooth'
+          });
+        }
+        
+        // Close navbar on mobile
+        const navbarToggler = document.querySelector('.navbar-toggler');
+        const navbarCollapse = document.querySelector('.navbar-collapse');
+        if (navbarCollapse.classList.contains('show')) {
+          navbarToggler.click();
+        }
+      });
+    });
+
+    // Active nav links
+    const sections = document.querySelectorAll('section');
+    const navLinks = document.querySelectorAll('.nav-link');
+
+    window.addEventListener('scroll', () => {
+      let current = '';
+      const offset = 200;
+
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop - offset;
+        const sectionHeight = section.offsetHeight;
+        if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
+          current = section.getAttribute('id');
+        }
+      });
+
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === `#${current}`) {
+          link.classList.add('active');
+        }
+      });
+    });
+
+    // Project Filter
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const projectItems = document.querySelectorAll('.project-item');
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        // Active button
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        // Filter projects
+        const filterValue = btn.getAttribute('data-filter');
+        
+        projectItems.forEach(item => {
+          if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
+            item.style.display = 'block';
+          } else {
+            item.style.display = 'none';
+          }
+        });
+      });
+    });
+
+    // Scroll Animation
+    const fadeInElements = document.querySelectorAll('.fade-in');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('appear');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    fadeInElements.forEach(element => {
+      observer.observe(element);
+    });
+
+    // Back to top button
+    const backToTopBtn = document.querySelector('.back-to-top');
+    
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 300) {
+        backToTopBtn.classList.add('visible');
+      } else {
+        backToTopBtn.classList.remove('visible');
+      }
+    });
+    
+    backToTopBtn.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+
+    // Dark Mode Toggle
+    const themeToggle = document.getElementById('themeToggle');
+    const body = document.body;
+    
+    // Check for saved theme preference
+    if (localStorage.getItem('dark-mode') === 'true') {
+      body.classList.add('dark-mode');
+      themeToggle.classList.add('dark');
+    }
+    
+    themeToggle.addEventListener('click', () => {
+      body.classList.toggle('dark-mode');
+      themeToggle.classList.toggle('dark');
+      
+      // Save preference
+      localStorage.setItem('dark-mode', body.classList.contains('dark-mode'));
+    });
+
+    // Typing Animation
+    const typingElement = document.getElementById('typingText');
+    const textToType = typingElement.textContent.trim();
+    typingElement.textContent = '';
+    
+    let i = 0;
+    const typingInterval = setInterval(() => {
+      if (i < textToType.length) {
+        typingElement.textContent += textToType.charAt(i);
+        i++;
+      } else {
+        clearInterval(typingInterval);
+        typingElement.classList.remove('typing');
+      }
+    }, 100);
+  </script>
+</body>
+</html>
